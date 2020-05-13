@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import RegionSelect from 'react-region-select';
-import dolphinImage from './dolphin.jpg'
-
-// require('./style.css');
+import dolphinImage from '../dolphin.jpg'
+import RegionTable from './RegionTable'
 
 const DEFAULT_COLOR = 'rgba(0, 0, 0, 0.5)'
 const RED = 'rgba(255, 0, 0, 0.5)';
@@ -47,12 +46,8 @@ class App extends Component {
 					Select something with your mouse on the left side
 				</div>
 				<div style={{ bottom: 0 }}>
-					<table id='test table'>
-						<tbody>
-							{this.renderTableHeader()}
-							{this.renderTableData(this.state.regions)}
-						</tbody>
-					</table>
+					{console.log(this.state)}
+					<RegionTable regions={'regions' in this.state? this.state.regions : []} />
 				</div>
 			</div>
 		);
@@ -65,7 +60,6 @@ class App extends Component {
 	}
 
 	regionRenderer (regionProps) {
-		console.log(regionProps)
 		if (!regionProps.isChanging) {
 			return (
 				<div style={{ position: 'absolute', right: 0, bottom: '-1.5em' }}>
@@ -108,78 +102,6 @@ class App extends Component {
 			...this.state.regions.slice(index + 1)
 		]);
 	}
-
-	renderTableHeader() {
-			return (
-				<tr>
-					<td>INDEX</td>
-					<td>Left Upper Corner - X</td>
-					<td>Left Upper Corner - Y</td>
-					<td>Width</td>
-					<td>Height</td>
-					<td>COLOR</td>
-				</tr>
-			)
-	}
-
-	renderTableData(regions) {
-		if (regions.length > 0) {
-			return regions.map((region, index) => {
-				console.log(region, index)
-				let color = RED
-				if ('regionStyle' in region.data) {
-					color = region.data.regionStyle.background
-				}
-			   	return (
-				  	<tr key={index}>
-					 	<td>{index}</td>
-						<td>{region.x.toFixed(2)}</td>
-					    <td>{region.y.toFixed(2)}</td>
-					    <td>{region.width.toFixed(2)}</td>
-					    <td>{region.height.toFixed(2)}</td>
-					 	<td>{color}</td>
-				  	</tr>
-			   	)
-			})
-		} else {
-			console.log('This is a test')
-			return
-		}
-	}
-
 }
 
 export default App
-
-// module.exports = App;
-
-// import React from 'react';
-// // import logo from './logo.svg';
-// import dolphinImg from './dolphin.jpg'
-// import Region from './Region'
-// import './App.css';
-// 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={dolphinImg} className="App-logo" alt="logo" />
-//         <Region />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-// 
-// export default App;
-// 
