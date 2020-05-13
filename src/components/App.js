@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RegionSelect from 'react-region-select';
 import dolphinImage from '../dolphin.jpg'
 import RegionTable from './RegionTable'
+import ConnectedRegionSelect from '../containers/ConnectedRegionSelect'
 
 const DEFAULT_COLOR = 'rgba(0, 0, 0, 0.5)'
 const RED = 'rgba(255, 0, 0, 0.5)';
@@ -31,12 +32,11 @@ class App extends Component {
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				<div style={{ flexGrow: 1, flexShrink: 1, width: '50%' }}>
 					<RegionSelect
-						maxRegions={30}
 						regions={this.state.regions}
             			regionStyle={regionStyle}
 						constraint
 						onChange={this.onChange}
-						regionRenderer={this.regionRenderer}
+ 						regionRenderer={this.regionRenderer}
 						style={{ border: '1px solid black' }}
 					>
 						<img src={dolphinImage} width='100%' alt='dolphin'/>

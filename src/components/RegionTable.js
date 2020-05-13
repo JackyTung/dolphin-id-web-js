@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react';
 import RegionRow from './RegionRow'
+import ConnectedRegionRow from '../containers/ConnectedRegionRow'
 import RegionHeader from './RegionHeader'
 
 function RegionTable(props) {
@@ -9,8 +10,11 @@ function RegionTable(props) {
 		return <table id={tableId}>
 			<RegionHeader />
 			<tbody>
-				{props.regions.map(
-					(region, index) => <RegionRow key={index} region={region} />
+				{props.regions.map((region, index) => 
+					<ConnectedRegionRow 
+						key={index} 
+						region={region} 
+					/>
 				)}
 			</tbody>
 		</table>
@@ -29,7 +33,7 @@ RegionTable.propTypes = {
 		width: PropTypes.number,
 		height: PropTypes.number,
 		data: PropTypes.object
-	}))
+	})),
 }
 
 export default RegionTable
