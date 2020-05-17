@@ -8,6 +8,10 @@ function RegionHeader() {
 		'Width',
 		'Height',
 		'Color',
+		'Trip Date',
+		'Trip Number',
+		'Trip ID',
+		'Ku ID'
 	]
 	return <thead>
 		<tr>
