@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RegionSelect from 'react-region-select';
+import RegionSelect from '../components/RegionSelect'
 import dolphinImage from '../dolphin.jpg'
 import RegionTable from './RegionTable'
 import ConnectedRegionSelect from '../containers/ConnectedRegionSelect'
