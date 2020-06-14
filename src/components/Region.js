@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types'; 
-import objectAssign from 'object-assign';
 import style from './style';
 
 class Region extends Component {
 	constructor (props) {
 		super(props);
 	}
+
 	renderHandles () {
 		return (
 			<div>
@@ -21,8 +21,8 @@ class Region extends Component {
 		const localStyle = {
 			width: this.props.width + '%',
 			height: this.props.height + '%',
-			left: `${this.props.x}%`,
-			top: `${this.props.y}%`
+			left: this.props.x + '%',
+			top: this.props.y + '%'
 		};
 		const dataRenderArgs = {
 			data: this.props.data,
@@ -32,7 +32,13 @@ class Region extends Component {
 
 		return (
 			<div
-				style={objectAssign({}, style.Region, localStyle, this.props.customStyle, this.props.data.regionStyle)}
+				style={Object.assign(
+					{}, 
+					style.Region, 
+					localStyle, 
+					this.props.customStyle, 
+					this.props.data.regionStyle
+				)}
 				onMouseDown={this.props.onCropStart}
 				onTouchStart={this.props.onCropStart}
 				data-wrapper="wrapper"
@@ -43,6 +49,7 @@ class Region extends Component {
 		);
 	}
 }
+
 Region.propTypes = {
 	x: PropTypes.number.isRequired,
 	y: PropTypes.number.isRequired,

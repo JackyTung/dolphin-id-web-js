@@ -46,7 +46,6 @@ class App extends Component {
 					Select something with your mouse on the left side
 				</div>
 				<div style={{ bottom: 0 }}>
-					{console.log(this.state)}
 					<RegionTable regions={'regions' in this.state? this.state.regions : []} />
 				</div>
 			</div>

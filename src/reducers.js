@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { SET_TRIP_NUMBER } from './action'
+import { SET_TRIP_NUMBER, SET_REGION_IS_CHANGING } from './action'
 
 const RED = 'rgba(255, 0, 0, 0.5)';
 const GREEN = 'rgba(0, 255, 0, 0.5)';
@@ -80,6 +80,21 @@ function updateTripNumberData(data, num) {
     )
 }
 
+/**
+ * Sets the state for regionIsChanging.
+ * 
+ * @param {*} prevState Previous state for regionIsChanging. 
+ * @param {*} action Action for regionIsChanging
+ */
+function setRegionIsChanging(prevState = false, action) {
+    if (action.type === SET_REGION_IS_CHANGING ) {
+        return action.isChanging
+    } else {
+        return prevState
+    }
+}
+
 export default combineReducers({
-    regions: setRegions
+    regions: setRegions,
+    isChanging: setRegionIsChanging
 })
