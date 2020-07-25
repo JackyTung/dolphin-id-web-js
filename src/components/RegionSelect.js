@@ -7,6 +7,7 @@ import RegionChangeState from '../const/RegionChangeState';
 
 class RegionSelect extends Component {
 	constructor (props) {
+		console.logs('>>> Props:' + props)
 		super(props);
 		this.onComponentMouseTouchDown = this.onComponentMouseTouchDown.bind(this);
 		this.onDocMouseTouchMove = this.onDocMouseTouchMove.bind(this);
@@ -48,12 +49,12 @@ class RegionSelect extends Component {
 	createRegion(event) {
 		const clientPos = this.getClientPos(event);
 		const imageOffset = this.getElementOffset(this.refs.image);
-		const xPc = (clientPos.x - imageOffset.left) / this.refs.image.offsetWidth * 100;
-		const yPc = (clientPos.y - imageOffset.top) / this.refs.image.offsetHeight * 100;
+		const xPct = ((clientPos.x - imageOffset.left) / this.refs.image.offsetWidth) * 100;
+		const yPct = ((clientPos.y - imageOffset.top) / this.refs.image.offsetHeight) * 100;
 		this.isChanging = true;
 		const rect = {
-			x: xPc,
-			y: yPc,
+			x: xPct,
+			y: yPct,
 			width: 0,
 			height: 0,
 			new: true,
@@ -74,6 +75,8 @@ class RegionSelect extends Component {
 		};
 		this.props.onChange(this.props.regions.concat(rect));
 		this.regionChangeIndex = this.props.regions.length;
+		console.log(this.props)
+// 		this.props.createRegionDispatch(xPct, yPct)
 	}
 
 	/**
@@ -133,9 +136,11 @@ class RegionSelect extends Component {
 	}
 
 	onRegionMoveStart (event, index) {
-		if (!event.target.dataset.wrapper && !event.target.dataset.dir) {
+		console.log('>>> Move Index:' + index)
+		if (!this.isInExistedRegion(event)) {
 			return;
 		}
+
 		event.preventDefault();
 
 		const clientPos = this.getClientPos(event);
@@ -398,7 +403,8 @@ RegionSelect.propTypes = {
 	className: PropTypes.string,
 	style: PropTypes.object,
 	regionStyle: PropTypes.object,
-	isChanging: PropTypes.bool
+	isChanging: PropTypes.bool,
+	createRegionDispatch: PropTypes.func,
 };
 
 RegionSelect.defaultProps = {

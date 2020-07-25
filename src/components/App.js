@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import RegionSelect from '../components/RegionSelect'
 import dolphinImage from '../dolphin.jpg'
-import RegionTable from './RegionTable'
-import ConnectedRegionSelect from '../containers/ConnectedRegionSelect'
+import ConnectedAlienRegionSelect from '../containers/ConnectedAlienRegionSelect'
+import ConnectedRegionTable from '../containers/ConnectedRegionTable'
 
 const DEFAULT_COLOR = 'rgba(0, 0, 0, 0.5)'
 const RED = 'rgba(255, 0, 0, 0.5)';
@@ -31,22 +31,18 @@ class App extends Component {
 		return (
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				<div style={{ flexGrow: 1, flexShrink: 1, width: '50%' }}>
-					<RegionSelect
-						regions={this.state.regions}
+					<ConnectedAlienRegionSelect
             			regionStyle={regionStyle}
-						constraint
-						onChange={this.onChange}
- 						regionRenderer={this.regionRenderer}
 						style={{ border: '1px solid black' }}
 					>
 						<img src={dolphinImage} width='100%' alt='dolphin'/>
-					</RegionSelect>
+					</ConnectedAlienRegionSelect>
 				</div>
 				<div style={{ flexGrow: 1, flexShrink: 1, width: '50%', padding: 15 }}>
 					Select something with your mouse on the left side
 				</div>
 				<div style={{ bottom: 0 }}>
-					<RegionTable regions={'regions' in this.state? this.state.regions : []} />
+					<ConnectedRegionTable></ConnectedRegionTable>
 				</div>
 			</div>
 		);

@@ -7,11 +7,11 @@ function RegionHeader() {
 		'Upper Left Y',
 		'Width',
 		'Height',
-		'Color',
 		'Trip Date',
 		'Trip Number',
 		'Trip ID',
-		'Ku ID'
+		'Ku ID',
+		'Delete'
 	]
 	return <thead>
 		<tr>

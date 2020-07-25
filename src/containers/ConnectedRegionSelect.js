@@ -1,6 +1,6 @@
 import RegionSelect from 'react-region-select'
 import { connect } from 'react-redux'
-import { setRegions } from '../action'
+import { setRegions, createRegion } from '../action'
 
 function mapStateToProps(state) {
     return {
@@ -12,7 +12,8 @@ function mapDispatchToProps(dispatch) {
     return {
         onChange: (regions) => dispatch(setRegions(
             regions
-        ))
+        )),
+        createRegionDispatch: (x, y) => dispatch(createRegion(x, y)),
     }
 }
 
