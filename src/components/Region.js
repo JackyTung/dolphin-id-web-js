@@ -2,53 +2,54 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types'; 
 import style from './style';
 
-class Region extends Component {
-	constructor (props) {
-		super(props);
-	}
+function Region(props) {
+	const localStyle = {
+		width: props.width + '%',
+		height: props.height + '%',
+		left: props.x + '%',
+		top: props.y + '%'
+	};
 
-	renderHandles () {
-		return (
+	let corners = null;
+	if (props.handles) {
+		corners = (
 			<div>
 				<div data-dir='se' style={style.RegionHandleSE} />
 				<div data-dir='sw' style={style.RegionHandleSW} />
 				<div data-dir='nw' style={style.RegionHandleNW} />
 				<div data-dir='ne' style={style.RegionHandleNE} />
-			</div>
-		);
+			</div> 
+		)
 	}
-	render () {
-		const localStyle = {
-			width: this.props.width + '%',
-			height: this.props.height + '%',
-			left: this.props.x + '%',
-			top: this.props.y + '%'
-		};
-		const dataRenderArgs = {
-			data: this.props.data,
-			isChanging: this.props.changing,
-			index: this.props.index
-		};
 
-		return (
-			<div
-				style={Object.assign(
-					{}, 
-					style.Region, 
-					localStyle, 
-					this.props.customStyle, 
-					this.props.data.regionStyle
-				)}
-				onMouseDown={this.props.onCropStart}
-				onTouchStart={this.props.onCropStart}
-				data-wrapper="wrapper"
-				>
-				{this.props.handles ? this.renderHandles() : null}
-				{this.props.dataRenderer ? this.props.dataRenderer(dataRenderArgs) : null}
-			</div>
-		);
-	}
-}
+	return (
+		<div
+			style={Object.assign(
+				{}, 
+				style.Region, 
+				localStyle, 
+				props.customStyle, 
+				props.data.regionStyle
+			)}
+			onMouseDown={props.onCropStart}
+			onTouchStart={props.onCropStart}
+			data-wrapper="wrapper"
+			>
+			{corners}
+		</div>
+	);
+} 
+
+// function renderCornerHandles() {
+// 	return (
+// 		<div>
+// 			<div data-dir='se' style={style.RegionHandleSE} />
+// 			<div data-dir='sw' style={style.RegionHandleSW} />
+// 			<div data-dir='nw' style={style.RegionHandleNW} />
+// 			<div data-dir='ne' style={style.RegionHandleNE} />
+// 		</div>
+// 	);
+// }
 
 Region.propTypes = {
 	x: PropTypes.number.isRequired,

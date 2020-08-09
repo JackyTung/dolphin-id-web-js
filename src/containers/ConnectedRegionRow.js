@@ -1,14 +1,36 @@
 import { connect } from 'react-redux'
-import { updateTripNumber } from '../action'
+import * as actions from '../action'
 import RegionRow from '../components/RegionRow'
 
-function mapDispatchToProps(dispatch, ownProps) {
+
+function mapStateToProps(state) {
     return {
-        setTripNumber: (event) => dispatch(updateTripNumber(
-            event.target.value,
-            ownProps.region.data.index
-        ))
+        target: state.target,
     }
 }
 
-export default connect(null, mapDispatchToProps)(RegionRow)
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        setTripDate: (event) => dispatch(actions.setTripDate(
+            event.target.value,
+            ownProps.region.index,
+        )),
+        setTripNumber: (event) => dispatch(actions.setTripNumber(
+            event.target.value,
+            ownProps.region.index,
+        )),
+        setTripID: (event) => dispatch(actions.setTripID(
+            event.target.value,
+            ownProps.region.index,
+        )),
+        setKUID: (event) => dispatch(actions.setKUID(
+            event.target.value,
+            ownProps.region.index,
+        )),
+        deleteRegion: (event) => dispatch(actions.deleteRegion(
+            ownProps.region.index,
+        )),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegionRow)
