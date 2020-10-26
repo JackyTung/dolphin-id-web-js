@@ -15,6 +15,12 @@ export const REGION_STATE_UNCHANGED = 'REGION_STATE_UNCHANGED'
 export const REGION_STATE_MOVE = 'REGION_STATE_MOVE'
 export const REGION_STATE_RESIZE = 'REGION_STATE_RESIZE'
 
+export const FILESYSTEM_SET_ROOT_FOLDER = 'FILESYSTEM_SET_ROOT_FOLDER'
+export const FILESYSTEM_SEND_REQ_LIST_FOLDER = 'FILESYSTEM_SEND_REQ_LIST_FOLDER'
+export const FILESYSTEM_SET_IMG_SRC = 'FILESYSTEM_SET_IMG_SRC'
+
+const API_FILESYSTEM = 'http://localhost:5000'
+
 export function createRegion(x, y, index) {
     return {
         type: CREATE_REGION,
@@ -149,5 +155,28 @@ export function setRegions(regions) {
     return {
         type: SET_REGIONS,
         regions: regions
+    }
+}
+
+export function setRootFolder(rootFolder) {
+    return {
+        type: FILESYSTEM_SET_ROOT_FOLDER,
+        rootFolder: rootFolder,
+    }
+}
+
+export function sendReqListFolder(folder, api = API_FILESYSTEM) {
+    return {
+        type: FILESYSTEM_SEND_REQ_LIST_FOLDER,
+        folder: folder,
+        api: api,
+    }
+}
+
+export function setImgSrc(path, api = API_FILESYSTEM) {
+    return {
+        type: FILESYSTEM_SET_IMG_SRC,
+        path: path,
+        api: api,
     }
 }

@@ -273,7 +273,83 @@ function updateKUIDData(data, kuId) {
     )
 }
 
+const DEFAULT_ROOT_FOLDER = '/Users/Alien/workspace/project/private/dolphin-id-backend/data/'
+const DEFAULT_IMG_SRC = 'http://localhost:5000/img'
+const DEFAULT_FILE_CONTENTS = [
+    {
+        tp: 'folder',
+        path: '/Users/Alien/workspace/project/private/dolphin-id-backend/data/inner_1',
+        id: 1,
+        contents: [
+            {
+                tp: 'file',
+                path: '/Users/Alien/workspace/project/private/dolphin-id-backend/data/inner_1/HL20100702_01_Gg_990702 (81).JPG',
+                id: 4,
+            },
+            {
+                tp: 'file',
+                path: '/Users/Alien/workspace/project/private/dolphin-id-backend/data/inner_1/HL20100702_01_Gg_990702 (82).JPG',
+                id: 5,
+            },
+        ],
+    },	
+    {
+        tp: 'file',
+        path: '/Users/Alien/workspace/project/private/dolphin-id-backend/data/HL20100702_01_Gg_990702 (97).JPG',
+        id: 2,
+    },
+    {
+        tp: 'file',
+        path: '/Users/Alien/workspace/project/private/dolphin-id-backend/data/HL20100702_01_Gg_990702 (98).JPG',
+        id: 3,
+    },
+]
+
+const DEFAULT_FILE_SYSTEM = {
+    rootFolder: DEFAULT_ROOT_FOLDER,
+    imgSrc: DEFAULT_IMG_SRC,
+    fileContents: DEFAULT_FILE_CONTENTS,
+}
+
+function setFileSystem(state = DEFAULT_FILE_SYSTEM, action) {
+    switch (action.type) {
+        case all_actions.FILESYSTEM_SET_ROOT_FOLDER:
+            return setRootFolder(state, action.rootFolder)
+        case all_actions.FILESYSTEM_SET_IMG_SRC:
+            return setImgSrc(state, action.path, action.api)
+        default:
+            return state
+    }
+}
+
+function setRootFolder(data, rootFolder) {
+    return Object.assign(
+        {},
+        data,
+        {
+            'rootFolder': rootFolder,
+        },
+    )
+}
+
+function setImgSrc(data, path, api) {
+    console.log(path)
+    console.log(api)
+    return Object.assign(
+        {},
+        data,
+        {
+            'imgSrc': getImgSrcApi(path, api),
+        },
+    )
+}
+
+function getImgSrcApi(path, api) {
+    return `${api}/img?img_path=${path}`
+}
+
 export default combineReducers({
     regions: setRegions,
     target: setTarget,
+    fileSystem: setFileSystem,
 })
