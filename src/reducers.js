@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import * as all_actions from './action'
 import { SET_TRIP_NUMBER, SET_REGION_IS_CHANGING, CREATE_REGION, RESIZE_REGION, MOVE_REGION, REGION_STATE_UNCHANGED, REGION_STATE_MOVE, REGION_STATE_RESIZE } from './action'
 import * as c from './const'
+import * as uuid from 'uuid'
 
 const RED = 'rgba(255, 0, 0, 0.5)';
 const GREEN = 'rgba(0, 255, 0, 0.5)';
@@ -317,6 +318,8 @@ function setFileSystem(state = DEFAULT_FILE_SYSTEM, action) {
             return setRootFolder(state, action.rootFolder)
         case all_actions.FILESYSTEM_SET_IMG_SRC:
             return setImgSrc(state, action.path, action.api)
+        case all_actions.FILESYSTEM_FETCH_LIST_SUCCESS:
+            return setRootFolderContents(state, action.contents)
         default:
             return state
     }
@@ -346,6 +349,44 @@ function setImgSrc(data, path, api) {
 
 function getImgSrcApi(path, api) {
     return `${api}/img?img_path=${path}`
+}
+
+function setRootFolderContents(data, result) {
+    return Object.assign(
+        {},
+        data,
+        {
+            'fileContents': contentsFromResult(result),
+        },
+    )
+}
+
+function contentsFromResult(result) {
+    const rawContents = result.contents
+    const dirs = rawContents.dirs.map(
+        path => toFolderContent(path)
+    ) 
+    const files = rawContents.files.map(
+        path => toFileContent(path)  
+    )
+    return dirs.concat(files)
+}
+
+function toFolderContent(path) {
+    return {
+        tp: 'folder',
+        path: path,
+        contents: [],
+        id: uuid.v4(),
+    } 
+}
+
+function toFileContent(path) {
+    return {
+        tp: 'file',
+        path: path,
+        id: uuid.v4(),
+    }
 }
 
 export default combineReducers({

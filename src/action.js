@@ -16,10 +16,18 @@ export const REGION_STATE_MOVE = 'REGION_STATE_MOVE'
 export const REGION_STATE_RESIZE = 'REGION_STATE_RESIZE'
 
 export const FILESYSTEM_SET_ROOT_FOLDER = 'FILESYSTEM_SET_ROOT_FOLDER'
-export const FILESYSTEM_SEND_REQ_LIST_FOLDER = 'FILESYSTEM_SEND_REQ_LIST_FOLDER'
+export const FILESYSTEM_FETCH_LIST_BEGIN = 'FILESYSTEM_FETCH_LIST_BEGIN'
+export const FILESYSTEM_FETCH_LIST_SUCCESS = 'FILESYSTEM_FETCH_LIST_SUCCESS'
 export const FILESYSTEM_SET_IMG_SRC = 'FILESYSTEM_SET_IMG_SRC'
 
+export const REGIONS_PREDICT_BEGIN = 'REGIONS_PREDICT_BEGIN'
+export const REGIONS_PREDICT_SUCCESS = 'REGIONS_PREDICT_SUCCESS'
+
 const API_FILESYSTEM = 'http://localhost:5000'
+
+const projectId = 'dolphin-170615'
+const modelId = 'dolphin_id_201910_20191012044136'
+const apiPrediction = `https://automl.googleapis.com/v1/projects/${projectId}/locations/us-central1/models/${modelId}:predict`
 
 export function createRegion(x, y, index) {
     return {
@@ -165,11 +173,32 @@ export function setRootFolder(rootFolder) {
     }
 }
 
-export function sendReqListFolder(folder, api = API_FILESYSTEM) {
+export function fetchListFolderBegin(folder, api = API_FILESYSTEM) {
     return {
-        type: FILESYSTEM_SEND_REQ_LIST_FOLDER,
+        type: FILESYSTEM_FETCH_LIST_BEGIN,
         folder: folder,
         api: api,
+    }
+}
+
+export function fetchListFolderSuccess(contents) {
+    return {
+        type: FILESYSTEM_FETCH_LIST_SUCCESS,
+        contents: contents,
+    }
+}
+
+export function predictRegionsBegin(imgPath) {
+    return {
+        type: REGIONS_PREDICT_BEGIN,
+        imgPath: imgPath,
+    }
+}
+
+export function predictRegionsSuccess(payload) {
+    return {
+        type: REGIONS_PREDICT_SUCCESS,
+        payload: payload,
     }
 }
 

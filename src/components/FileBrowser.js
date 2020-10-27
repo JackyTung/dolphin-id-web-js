@@ -16,6 +16,8 @@ const useStyles = makeStyles({
 
 export default function FileBrowser(props) {
     const classes = useStyles();
+    console.log('File Contents')
+    console.log(props.fileContents)
 
     let contents = props.fileContents.map(
         content => <ConnectedFileBrowserItem 

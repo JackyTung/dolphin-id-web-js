@@ -13,8 +13,8 @@ function mapDispatchToProps(dispatch) {
         setRootFolder: (event) => dispatch(actions.setRootFolder(
             event.target.value,
         )),
-        sendReqListFolderGen: (folder) => {
-            return (event) => dispatch(actions.sendReqListFolder(
+        fetchListFolderBeginGen: (folder) => {
+            return (event) => dispatch(actions.fetchListFolderBegin(
                 folder,
             ))
         },
@@ -25,7 +25,7 @@ function mergeProps(stateProps, dispatchProps) {
     return {
         rootFolder: stateProps.rootFolder,
         setRootFolder: dispatchProps.setRootFolder,
-        sendReqListFolder: dispatchProps.sendReqListFolderGen(
+        fetchListFolderBegin: dispatchProps.fetchListFolderBeginGen(
             stateProps.rootFolder,
         ),
     }
