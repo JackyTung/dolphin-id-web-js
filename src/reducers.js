@@ -389,7 +389,31 @@ function toFileContent(path) {
     }
 }
 
+function setImage(state = {}, action) {
+    switch (action.type) {
+        case all_actions.IMAGE_SET_TRIP_DATE:
+            return Object.assign(
+                {},
+                state,
+                {
+                    'tripDate': action.date,
+                },
+           )
+        case all_actions.IMAGE_SET_TRIP_NUMBER:
+            return Object.assign(
+                {},
+                state,
+                {
+                    'tripNumber': action.number,
+                }
+            )
+        default:
+            return state
+    }
+}
+
 export default combineReducers({
+    image: setImage,
     regions: setRegions,
     target: setTarget,
     fileSystem: setFileSystem,

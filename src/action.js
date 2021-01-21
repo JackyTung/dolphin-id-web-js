@@ -23,6 +23,9 @@ export const FILESYSTEM_SET_IMG_SRC = 'FILESYSTEM_SET_IMG_SRC'
 export const REGIONS_PREDICT_BEGIN = 'REGIONS_PREDICT_BEGIN'
 export const REGIONS_PREDICT_SUCCESS = 'REGIONS_PREDICT_SUCCESS'
 
+export const IMAGE_SET_TRIP_DATE = 'IMAGE_SET_TRIP_DATE'
+export const IMAGE_SET_TRIP_NUMBER = 'IMAGE_SET_TRIP_NUMBER'
+
 const API_FILESYSTEM = 'http://localhost:5000'
 
 const projectId = 'dolphin-170615'
@@ -207,5 +210,19 @@ export function setImgSrc(path, api = API_FILESYSTEM) {
         type: FILESYSTEM_SET_IMG_SRC,
         path: path,
         api: api,
+    }
+}
+
+export function setImageTripDate(date) {
+    return {
+        type: IMAGE_SET_TRIP_DATE,
+        date: date,
+    }
+}
+
+export function setImageTripNumber(number) {
+    return {
+        type: IMAGE_SET_TRIP_NUMBER,
+        number: number,
     }
 }

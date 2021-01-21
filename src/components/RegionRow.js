@@ -77,7 +77,10 @@ RegionRow.propTypes = {
 		width: PropTypes.number,
 		height: PropTypes.number,
         data: PropTypes.object,
-        setTripNumber: PropTypes.func
+        setTripNumber: PropTypes.func,
+        setTripID: PropTypes.func,
+        setKUID: PropTypes.func,
+        deleteRegion: PropTypes.func,
 	})
 }
 
