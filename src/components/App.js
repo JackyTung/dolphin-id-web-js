@@ -7,6 +7,8 @@ import ConnectedFileBrowser from '../containers/ConnectedFileBrowser'
 import ConnectedFolderGetter from '../containers/ConnectedFolderGetter'
 import ConnectedImage from '../containers/ConnectedImage'
 import ConnectedPredictButton from '../containers/ConnectedPredictButton'
+import ImageTable from '../components/ImageTable'
+import ConnectedImageTable from '../containers/ConnectedImageTable'
 
 const DEFAULT_COLOR = 'rgba(0, 0, 0, 0.5)'
 const RED = 'rgba(255, 0, 0, 0.5)';
@@ -49,6 +51,9 @@ class App extends Component {
 						>
 							<ConnectedImage />
 						</ConnectedAlienRegionSelect>
+					</div>
+					<div>
+						<ConnectedImageTable></ConnectedImageTable>
 					</div>
 					<div style={{ bottom: 0 }}>
 						<ConnectedRegionTable></ConnectedRegionTable>
