@@ -87,7 +87,6 @@ function setTarget(target = {}, action) {
 
 function fixDim(oldDim, shift, length) {
     let newDimRaw = oldDim + shift
-    console.log('oldDim:' + oldDim + ', newDimRaw:' + newDimRaw)
     if ((newDimRaw + length) >= 100) {
         return 100 - length
     } else if (newDimRaw <= 0) {
@@ -114,7 +113,6 @@ function getRectFromOppositeCorners(
 
 
 function setRegions(regions = [], action) {
-    console.log(action)
     let region
     let newRegion
     switch (action.type) {
@@ -201,6 +199,8 @@ function setRegions(regions = [], action) {
                 updateRegion(regions[action.index], action),
                 ...regions.slice(action.index+1)
             ]
+        case all_actions.SET_REGIONS:
+            return action.regions
         default:
             return regions
     }
@@ -309,7 +309,8 @@ const DEFAULT_FILE_CONTENTS = [
 const DEFAULT_FILE_SYSTEM = {
     rootFolder: DEFAULT_ROOT_FOLDER,
     imgSrc: DEFAULT_IMG_SRC,
-    fileContents: DEFAULT_FILE_CONTENTS,
+    fileContents: [],
+//     fileContents: DEFAULT_FILE_CONTENTS,
 }
 
 function setFileSystem(state = DEFAULT_FILE_SYSTEM, action) {
@@ -336,8 +337,6 @@ function setRootFolder(data, rootFolder) {
 }
 
 function setImgSrc(data, path, api) {
-    console.log(path)
-    console.log(api)
     return Object.assign(
         {},
         data,
@@ -389,12 +388,20 @@ function toFileContent(path) {
     }
 }
 
-function setImage(state = {}, action) {
+function setImage(data = {}, action) {
     switch (action.type) {
+        case all_actions.IMAGE_SET_PATH:
+            return Object.assign(
+                {},
+                data,
+                {
+                    'path': action.path,
+                },
+            )
         case all_actions.IMAGE_SET_TRIP_DATE:
             return Object.assign(
                 {},
-                state,
+                data,
                 {
                     'tripDate': action.date,
                 },
@@ -402,14 +409,44 @@ function setImage(state = {}, action) {
         case all_actions.IMAGE_SET_TRIP_NUMBER:
             return Object.assign(
                 {},
-                state,
+                data,
                 {
                     'tripNumber': action.number,
                 }
             )
+        case all_actions.IMAGE_SET_ALL:
+            return action.data
         default:
-            return state
+            return data
     }
+}
+
+// FIXME: Fix the field `data` with `image` for sync.
+function setAggData(data = {}, action) {
+    switch (action.type) {
+        case all_actions.AGG_SET_DATA:
+            if (!action.imageData.hasOwnProperty('path')) {
+                return data
+            }
+            const fileName = getBasename(action.imageData.path)
+            return Object.assign(
+                {},
+                data,
+                {
+                    [fileName]: {
+                        'data': action.imageData,
+                        'regions': action.regions,
+                    },                 
+                }
+            )
+        default:
+            return data
+    }
+
+}
+
+function getBasename(path) {
+    return path.split('/').reverse()[0]
 }
 
 export default combineReducers({
@@ -417,4 +454,5 @@ export default combineReducers({
     regions: setRegions,
     target: setTarget,
     fileSystem: setFileSystem,
+    aggData: setAggData,
 })

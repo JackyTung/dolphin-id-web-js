@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import RegionSelect from '../components/RegionSelect'
-import dolphinImage from '../dolphin.jpg'
+// import RegionSelect from '../components/RegionSelect'
+// import dolphinImage from '../dolphin.jpg'
 import ConnectedAlienRegionSelect from '../containers/ConnectedAlienRegionSelect'
 import ConnectedRegionTable from '../containers/ConnectedRegionTable'
 import ConnectedFileBrowser from '../containers/ConnectedFileBrowser'
 import ConnectedFolderGetter from '../containers/ConnectedFolderGetter'
 import ConnectedImage from '../containers/ConnectedImage'
 import ConnectedPredictButton from '../containers/ConnectedPredictButton'
-import ImageTable from '../components/ImageTable'
 import ConnectedImageTable from '../containers/ConnectedImageTable'
+import ConnectedLoadRegionsButton from '../containers/ConnectedLoadImageDataButton'
 
 const DEFAULT_COLOR = 'rgba(0, 0, 0, 0.5)'
 const RED = 'rgba(255, 0, 0, 0.5)';
@@ -43,6 +43,7 @@ class App extends Component {
 				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					<div style={{ flexGrow: 1, flexShrink: 1, width: '50%' }}>
 						<ConnectedPredictButton />
+						<ConnectedLoadRegionsButton />
 					</div>
 					<div style={{ flexGrow: 1, flexShrink: 1, width: '50%' }}>
 						<ConnectedAlienRegionSelect

@@ -7,20 +7,19 @@ const TypeFolder = 'folder'
 const TypeFile = 'file'
 
 function FileBrowserItem(props) {
-    console.log(props)
     if (props.tp === TypeFile) {
-        return <TreeItem
-            nodeId={props.id}
-            label={getBasename(props.path)}
-            tp={props.tp}
-            path={props.path}
-            key={props.id.toString()}
-            onLabelClick={props.setImgSrc}
-        />
+        return (
+            <TreeItem
+                nodeId={props.id}
+                label={getBasename(props.path)}
+                tp={props.tp}
+                path={props.path}
+                key={props.id.toString()}
+                onLabelClick={props.setData}
+            />
+        )
     }
     else if  (props.tp === TypeFolder) {
-        console.log(props.contents)
-
         if (props.contents.length === 0) {
             return (
                 <TreeItem
