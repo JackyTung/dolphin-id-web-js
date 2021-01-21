@@ -6,6 +6,7 @@ import ConnectedRegionTable from '../containers/ConnectedRegionTable'
 import ConnectedFileBrowser from '../containers/ConnectedFileBrowser'
 import ConnectedFolderGetter from '../containers/ConnectedFolderGetter'
 import ConnectedImage from '../containers/ConnectedImage'
+import ConnectedPredictButton from '../containers/ConnectedPredictButton'
 
 const DEFAULT_COLOR = 'rgba(0, 0, 0, 0.5)'
 const RED = 'rgba(255, 0, 0, 0.5)';
@@ -39,15 +40,15 @@ class App extends Component {
 				</div>
 				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					<div style={{ flexGrow: 1, flexShrink: 1, width: '50%' }}>
+						<ConnectedPredictButton />
+					</div>
+					<div style={{ flexGrow: 1, flexShrink: 1, width: '50%' }}>
 						<ConnectedAlienRegionSelect
 	            			regionStyle={regionStyle}
 							style={{ border: '1px solid black' }}
 						>
 							<ConnectedImage />
 						</ConnectedAlienRegionSelect>
-					</div>
-					<div style={{ flexGrow: 1, flexShrink: 1, width: '50%', padding: 15 }}>
-						Select something with your mouse on the left side
 					</div>
 					<div style={{ bottom: 0 }}>
 						<ConnectedRegionTable></ConnectedRegionTable>

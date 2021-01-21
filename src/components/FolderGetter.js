@@ -11,8 +11,8 @@ function FolderGetter(props) {
                 onChange={props.setRootFolder}
             ></input>               
             <button 
-                name='send_req_list_folder'
-                onClick={props.sendReqListFolder}
+                name='fetch_list_folder_begin'
+                onClick={props.fetchListFolderBegin}
             >
             Get
             </button>    

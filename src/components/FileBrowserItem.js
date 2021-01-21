@@ -10,7 +10,7 @@ function FileBrowserItem(props) {
     console.log(props)
     if (props.tp === TypeFile) {
         return <TreeItem
-            nodeId={props.id.toString()}
+            nodeId={props.id}
             label={getBasename(props.path)}
             tp={props.tp}
             path={props.path}
@@ -20,18 +20,30 @@ function FileBrowserItem(props) {
     }
     else if  (props.tp === TypeFolder) {
         console.log(props.contents)
+
+        if (props.contents.length === 0) {
+            return (
+                <TreeItem
+                nodeId={props.id}
+                label={getBasename(props.path)}
+                tp={props.tp}
+                path={props.path}
+                />
+            )
+        }
+
         let children = props.contents.map(
             content => FileBrowserItem(content)
         )
         return (
-        <TreeItem
-            nodeId={props.id.toString()}
-            label={getBasename(props.path)}
-            tp={props.tp}
-            path={props.path}
-        >
-            {children}
-        </TreeItem>
+            <TreeItem
+                nodeId={props.id}
+                label={getBasename(props.path)}
+                tp={props.tp}
+                path={props.path}
+            >
+                {children}
+            </TreeItem>
         )
     }
 }
@@ -43,7 +55,7 @@ function getBasename(path) {
 FileBrowserItem.propTypes = {
     tp: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     contents: PropTypes.array,
     checked: PropTypes.bool,
     reqGetContents: PropTypes.func,
