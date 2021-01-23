@@ -398,6 +398,14 @@ function setImage(data = {}, action) {
                     'path': action.path,
                 },
             )
+        case all_actions.IMAGE_SET_META:
+            return Object.assign(
+                {},
+                data,
+                {
+                    'meta': action.meta,
+                },
+            )
         case all_actions.IMAGE_SET_TRIP_DATE:
             return Object.assign(
                 {},
