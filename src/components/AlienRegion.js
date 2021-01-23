@@ -20,8 +20,6 @@ function AlienRegion(props) {
 			</div> 
 		)
 
-	console.log(props)
-
 // 	onRegionMoveStart (event, index) {
 // 		console.log('>>> Move Index:' + index)
 // // 		if (!this.isInExistedRegion(event)) {
@@ -79,9 +77,6 @@ function AlienRegion(props) {
 
 		
 // 	}
-
-	console.log('For a single region')
-	console.log(props)
 
 	let colorStyle = {
 		background: c.COLOR_DEFAULT

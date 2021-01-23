@@ -23,8 +23,13 @@ export const FILESYSTEM_SET_IMG_SRC = 'FILESYSTEM_SET_IMG_SRC'
 export const REGIONS_PREDICT_BEGIN = 'REGIONS_PREDICT_BEGIN'
 export const REGIONS_PREDICT_SUCCESS = 'REGIONS_PREDICT_SUCCESS'
 
+export const IMAGE_SET_PATH = 'IMAGE_SET_PATH'
 export const IMAGE_SET_TRIP_DATE = 'IMAGE_SET_TRIP_DATE'
 export const IMAGE_SET_TRIP_NUMBER = 'IMAGE_SET_TRIP_NUMBER'
+export const IMAGE_SET_ALL = 'IMAGE_SET_ALL'
+
+export const AGG_SET_DATA = 'AGG_SET_DATA'
+
 
 const API_FILESYSTEM = 'http://localhost:5000'
 
@@ -213,6 +218,13 @@ export function setImgSrc(path, api = API_FILESYSTEM) {
     }
 }
 
+export function setImagePath(path) {
+    return {
+        type: IMAGE_SET_PATH,
+        path: path,
+    }
+}
+
 export function setImageTripDate(date) {
     return {
         type: IMAGE_SET_TRIP_DATE,
@@ -224,5 +236,20 @@ export function setImageTripNumber(number) {
     return {
         type: IMAGE_SET_TRIP_NUMBER,
         number: number,
+    }
+}
+
+export function setImageAll(data) {
+    return {
+        type: IMAGE_SET_ALL,
+        data: data,
+    }
+}
+
+export function setAggData(imageData, regions) {
+    return {
+        type: AGG_SET_DATA,
+        imageData: imageData,
+        regions: regions,   
     }
 }

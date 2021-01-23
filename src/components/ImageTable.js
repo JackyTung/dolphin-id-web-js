@@ -15,29 +15,31 @@ function ImageTable(props) {
                     <th key='2'>Image Trip Number</th>
         		</tr>
         	</thead>
-            <tr 
-                key='Image Row'
-                style={colorStyle}
-                >
-                <td>
-                    <input 
-                        type='date' 
-                        name='trip_date' 
-                        min='2000-01-01' 
-                        max='2099-12-31'
-                        value={props.image.tripDate}
-                        onChange={props.setImageTripDate}
-                    ></input>
-                </td>
-                <td>
-                    <input 
-                        type='number' 
-                        name='trip_number'  
-                        value={props.image.tripNum} 
-                        onChange={props.setImageTripNumber}
-                    ></input>
-                </td>
-         	</tr>
+            <tbody>
+                <tr 
+                    key='Image Row'
+                    style={colorStyle}
+                    >
+                    <td>
+                        <input 
+                            type='date' 
+                            name='trip_date' 
+                            min='2000-01-01' 
+                            max='2099-12-31'
+                            value={props.image.tripDate}
+                            onChange={props.setImageTripDate}
+                        ></input>
+                    </td>
+                    <td>
+                        <input 
+                            type='number' 
+                            name='trip_number'  
+                            value={props.image.tripNum} 
+                            onChange={props.setImageTripNumber}
+                        ></input>
+                    </td>
+             	</tr>
+            </tbody>
         </table>
     )
 }
