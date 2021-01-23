@@ -26,6 +26,7 @@ export const REGIONS_PREDICT_BEGIN = 'REGIONS_PREDICT_BEGIN'
 export const REGIONS_PREDICT_SUCCESS = 'REGIONS_PREDICT_SUCCESS'
 
 export const IMAGE_SET_PATH = 'IMAGE_SET_PATH'
+export const IMAGE_SET_META = 'IMAGE_SET_META'
 export const IMAGE_SET_TRIP_DATE = 'IMAGE_SET_TRIP_DATE'
 export const IMAGE_SET_TRIP_NUMBER = 'IMAGE_SET_TRIP_NUMBER'
 export const IMAGE_SET_ALL = 'IMAGE_SET_ALL'
@@ -225,6 +226,13 @@ export function setImagePath(path) {
     return {
         type: IMAGE_SET_PATH,
         path: path,
+    }
+}
+
+export function setImageMeta(meta) {
+    return {
+        type: IMAGE_SET_META,
+        meta: meta,
     }
 }
 
