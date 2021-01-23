@@ -47,7 +47,7 @@ class App extends Component {
 						<ConnectedLoadRegionsButton />
 						<ConnectedExportDataButton />
 					</div>
-					<div style={{ flexGrow: 1, flexShrink: 1, width: '50%' }}>
+					<div style={{ flexGrow: 1, flexShrink: 1, width: '70%' }}>
 						<ConnectedAlienRegionSelect
 	            			regionStyle={regionStyle}
 							style={{ border: '1px solid black' }}
