@@ -9,6 +9,7 @@ import ConnectedImage from '../containers/ConnectedImage'
 import ConnectedPredictButton from '../containers/ConnectedPredictButton'
 import ConnectedImageTable from '../containers/ConnectedImageTable'
 import ConnectedLoadRegionsButton from '../containers/ConnectedLoadImageDataButton'
+import ConnectedExportDataButton from '../containers/ConnectedExportDataButton'
 
 const DEFAULT_COLOR = 'rgba(0, 0, 0, 0.5)'
 const RED = 'rgba(255, 0, 0, 0.5)';
@@ -44,6 +45,7 @@ class App extends Component {
 					<div style={{ flexGrow: 1, flexShrink: 1, width: '50%' }}>
 						<ConnectedPredictButton />
 						<ConnectedLoadRegionsButton />
+						<ConnectedExportDataButton />
 					</div>
 					<div style={{ flexGrow: 1, flexShrink: 1, width: '50%' }}>
 						<ConnectedAlienRegionSelect

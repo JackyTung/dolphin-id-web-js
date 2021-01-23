@@ -19,6 +19,8 @@ export const FILESYSTEM_SET_ROOT_FOLDER = 'FILESYSTEM_SET_ROOT_FOLDER'
 export const FILESYSTEM_FETCH_LIST_BEGIN = 'FILESYSTEM_FETCH_LIST_BEGIN'
 export const FILESYSTEM_FETCH_LIST_SUCCESS = 'FILESYSTEM_FETCH_LIST_SUCCESS'
 export const FILESYSTEM_SET_IMG_SRC = 'FILESYSTEM_SET_IMG_SRC'
+export const FILESYSTEM_EXPORT_DATA_BEGIN = 'FILESYSTEM_EXPORT_DATA_BEGIN'
+export const FILESYSTEM_EXPORT_DATA_SUCCESS = 'FILESYSTEM_EXPORT_DATA_SUCCESS'
 
 export const REGIONS_PREDICT_BEGIN = 'REGIONS_PREDICT_BEGIN'
 export const REGIONS_PREDICT_SUCCESS = 'REGIONS_PREDICT_SUCCESS'
@@ -29,6 +31,7 @@ export const IMAGE_SET_TRIP_NUMBER = 'IMAGE_SET_TRIP_NUMBER'
 export const IMAGE_SET_ALL = 'IMAGE_SET_ALL'
 
 export const AGG_SET_DATA = 'AGG_SET_DATA'
+
 
 
 const API_FILESYSTEM = 'http://localhost:5000'
@@ -251,5 +254,22 @@ export function setAggData(imageData, regions) {
         type: AGG_SET_DATA,
         imageData: imageData,
         regions: regions,   
+    }
+}
+
+export function exportDataBegin(folder, data, api = API_FILESYSTEM) { 
+    return {
+        type: FILESYSTEM_EXPORT_DATA_BEGIN,
+        folder: folder,
+        data: data,
+        api: api,
+    }
+}
+
+export function exportDataSuccess(contents) {
+    alert(contents.comment)
+    return {
+        type: FILESYSTEM_EXPORT_DATA_SUCCESS,
+        contents: contents,
     }
 }
