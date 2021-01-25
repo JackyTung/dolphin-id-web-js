@@ -3,6 +3,8 @@ import * as all_actions from './action'
 import { SET_TRIP_NUMBER, SET_REGION_IS_CHANGING, CREATE_REGION, RESIZE_REGION, MOVE_REGION, REGION_STATE_UNCHANGED, REGION_STATE_MOVE, REGION_STATE_RESIZE } from './action'
 import * as c from './const'
 import * as uuid from 'uuid'
+import * as path from 'path'
+import * as lodash from 'lodash'
 
 const RED = 'rgba(255, 0, 0, 0.5)';
 const GREEN = 'rgba(0, 255, 0, 0.5)';
@@ -351,16 +353,21 @@ function getImgSrcApi(path, api) {
 }
 
 function setRootFolderContents(data, result) {
-    return Object.assign(
-        {},
-        data,
-        {
-            'fileContents': contentsFromResult(result),
-        },
-    )
+    const contents = toContentsFromResult(result)
+    if (!data.fileContents || data.fileContents.length === 0) {
+        return Object.assign(
+           {},
+           data,
+           {
+               'fileContents': contents.contents,
+           },
+        )
+    }
+
+    return updateSubFolder(data, contents)
 }
 
-function contentsFromResult(result) {
+function toContentsFromResult(result) {
     const rawContents = result.contents
     const dirs = rawContents.dirs.map(
         path => toFolderContent(path)
@@ -368,7 +375,10 @@ function contentsFromResult(result) {
     const files = rawContents.files.map(
         path => toFileContent(path)  
     )
-    return dirs.concat(files)
+    return {
+        'targetFolder': result.root_dir,
+        'contents': dirs.concat(files),
+    }
 }
 
 function toFolderContent(path) {
@@ -386,6 +396,33 @@ function toFileContent(path) {
         path: path,
         id: uuid.v4(),
     }
+}
+
+function updateSubFolder(data, contents) {
+    const targetFolder = contents.targetFolder
+    const targetSubFolders = targetFolder
+        .replace(data.rootFolder, "")
+        .split('/')
+
+    var baseFolder = data.rootFolder
+    var oldContents = data.fileContents 
+    for (var i = 0; i < targetSubFolders.length - 1; i++) {
+        baseFolder = path.join(baseFolder, targetSubFolders[i])
+
+        for (var j = 0; j < oldContents.length; j++) {
+            if (oldContents[j].path === baseFolder) {
+                oldContents = oldContents[j].contents
+            }
+        }
+    }
+
+    // Last one
+    for (var k = 0; k < oldContents.length; k++) {
+        if (oldContents[k].path === targetFolder) {
+            oldContents[k].contents = contents.contents
+        }
+    }
+    return lodash.cloneDeep(data)
 }
 
 function setImage(data = {}, action) {
