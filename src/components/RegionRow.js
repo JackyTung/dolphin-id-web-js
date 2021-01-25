@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react';
 import * as c from '../const'
+import * as uuid from 'uuid'
 
 function RegionRow(props) {
     let colorStyle = {
@@ -25,24 +26,6 @@ function RegionRow(props) {
     		<td>{props.region.height.toFixed(2)}</td>
             <td>
                 <input 
-                    type='date' 
-                    name='trip_date' 
-                    min='2000-01-01' 
-                    max='2099-12-31'
-                    value={props.region.data.tripDate}
-                    onChange={props.setTripDate}
-                ></input>
-            </td>
-            <td>
-                <input 
-                    type='number' 
-                    name='trip_number'  
-                    value={props.region.data.tripNum} 
-                    onChange={props.setTripNumber}
-                ></input>
-            </td>
-            <td>
-                <input 
                     type='number' 
                     name='trip_id'
                     value={props.region.data.tripId}
@@ -58,6 +41,9 @@ function RegionRow(props) {
                 ></input>   
             </td>
             <td>
+                {getPredictionOptions(props.region.prediction)}                    
+            </td>
+            <td>
                 <button 
                     name='delete_button'
                     onClick={props.deleteRegion}
@@ -67,6 +53,27 @@ function RegionRow(props) {
             </td>
     	</tr>
     )
+}
+
+function getPredictionOptions(labels) {
+    if (!labels || labels.length === 0) {
+        return <select></select>
+    }
+
+    const options = labels.map(function(label) {
+        console.log(label)
+        const predStr = toPredStr(label.kuId, label.tripId, label.prob)
+        const key = uuid.v4().slice(0, 8)
+        return <option key={key}>{predStr}</option>
+    })
+    return <select>{options}</select>
+} 
+
+function toPredStr(kuId, tripId, prob) {
+    const kuIdStr = kuId ? 'ku_' + kuId.toString() : ''
+    const tripIdStr = tripId ? tripId.toString() : ''
+    const probStr = prob? 'prob_' + prob.toString() : ''
+    return kuIdStr + ',' + tripIdStr + ',' + probStr
 }
 
 RegionRow.propTypes = {

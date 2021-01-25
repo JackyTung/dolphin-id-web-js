@@ -203,6 +203,12 @@ function setRegions(regions = [], action) {
             ]
         case all_actions.SET_REGIONS:
             return action.regions
+        case all_actions.REGIONS_PREDICT_SUCCESS:
+            const currentIndex = regions.length
+            const predRegions = action.payload.regions.map(
+                (region, idx) => toRegionFromPredictDatum(region, currentIndex + idx)
+            )
+            return regions.concat(predRegions)
         default:
             return regions
     }
@@ -274,6 +280,26 @@ function updateKUIDData(data, kuId) {
             'kuId': kuId,
         }
     )
+}
+
+function toRegionFromPredictDatum(datum, index) {
+    const labels = datum.labels.map(function(label) {
+        return {
+            kuId: label.ku_id,
+            tripId: label.tripId,
+            prob: label.prob,
+        }
+    })
+
+    return {
+        x: datum.x,
+        y: datum.y,
+        width: datum.width,
+        height: datum.height,
+        index: index,
+        data: labels.length > 0 ? labels[0] : {},
+        prediction: labels,
+    }    
 }
 
 const DEFAULT_ROOT_FOLDER = '/Users/Alien/workspace/project/private/dolphin-id-backend/data/'
