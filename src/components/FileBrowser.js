@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import FileBrowserItem from './FileBrowserItem'
 import ConnectedFileBrowserItem from '../containers/ConnectedFileBrowserItem'
 
 const useStyles = makeStyles({

@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types'; 
-import style from './style';
 import TreeItem from '@material-ui/lab/TreeItem'
+import ConnectedFileBrowserItem from '../containers/ConnectedFileBrowserItem'
+import * as utils from '../utils'
+
 
 const TypeFolder = 'folder'
 const TypeFile = 'file'
 
 function FileBrowserItem(props) {
+    console.log(props)
     if (props.tp === TypeFile) {
         return (
             <TreeItem
                 nodeId={props.id}
-                label={getBasename(props.path)}
+                label={utils.getBasename(props.path)}
                 tp={props.tp}
                 path={props.path}
                 key={props.id.toString()}
@@ -24,20 +27,28 @@ function FileBrowserItem(props) {
             return (
                 <TreeItem
                 nodeId={props.id}
-                label={getBasename(props.path)}
+                label={utils.getBasename(props.path)}
                 tp={props.tp}
                 path={props.path}
+                key={props.id.toString()}
+                onLabelClick={props.fetchListFolderBegin}
                 />
             )
         }
 
+        console.log(props.contents)
         let children = props.contents.map(
-            content => FileBrowserItem(content)
+            content => <ConnectedFileBrowserItem
+                {...content}
+                key={content.id}
+            />
         )
+        console.log('Test File Browser Item')
+        console.log(children)
         return (
             <TreeItem
                 nodeId={props.id}
-                label={getBasename(props.path)}
+                label={utils.getBasename(props.path)}
                 tp={props.tp}
                 path={props.path}
             >
@@ -45,10 +56,6 @@ function FileBrowserItem(props) {
             </TreeItem>
         )
     }
-}
-
-function getBasename(path) {
-    return path.split('/').reverse()[0]
 }
 
 FileBrowserItem.propTypes = {

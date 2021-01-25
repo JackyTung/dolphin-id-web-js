@@ -47,8 +47,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mergeProps(stateProps, dispatchProps, ownProps) {
-    console.log('[LoadImageDataButton] State Props')
-    console.log(stateProps)
     const image = Object.assign(
         {},
         stateProps.data.data,
@@ -56,8 +54,6 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
             'path': stateProps.image.path,
         }
     )
-    console.log('[LoadImageDataButton] New Image')
-    console.log(image)
     return Object.assign(
         {},
         ownProps,

@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import * as actions from '../action'
 import FileBrowserItem from '../components/FileBrowserItem'
+import * as utils from '../utils'
 
 function mapStateToProps(state) {
-    console.log(state)
     return {
         imageData: state.image,
         regions: state.regions,
@@ -16,20 +16,16 @@ function mapDispatchToProps(dispatch, ownProps) {
         setDataGen: (imageData, regions, newImageData, newRegions) => {
             return (event) => {
                 event.preventDefault()
-                console.log('aaa')
                 // Set img src (for display)
                 dispatch(actions.setImgSrc(
                     ownProps.path,
                 ))
 
                 // Set path to image data.
-                console.log('Own Props Path')
-                console.log(ownProps)
                 dispatch(actions.setImagePath(
                     ownProps.path,
                 ))
 
-                console.log('ccc')
                 // Set agg data.
                 dispatch(actions.setAggData(
                     imageData,
@@ -45,7 +41,10 @@ function mapDispatchToProps(dispatch, ownProps) {
 //                     newRegions,
 //                 ))
             }
-        }
+        },
+        fetchListFolderBegin: (event) => {
+            dispatch(actions.fetchListFolderBegin(ownProps.path))
+        },
     }
 }
 
@@ -60,13 +59,10 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
                 stateProps.regions,
                 newData.imageData,
                 newData.regions,
-            )
+            ),
+            fetchListFolderBegin: dispatchProps.fetchListFolderBegin,
         },
     )
-}
-
-function getBasename(path) {
-    return path.split('/').reverse()[0]
 }
 
 function getImageRegionsData(ownProps, aggData) {
@@ -77,7 +73,7 @@ function getImageRegionsData(ownProps, aggData) {
         }
     }
 
-    const newKey = getBasename(ownProps.path)
+    const newKey = utils.getBasename(ownProps.path)
     if (!(newKey in aggData)) {
         return {
             imageData: {},
