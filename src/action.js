@@ -2,6 +2,7 @@ export const SET_TRIP_DATE = 'SET_TRIP_DATE'
 export const SET_TRIP_NUMBER = 'SET_TRIP_NUMBER'
 export const SET_TRIP_ID = 'SET_TRIP_ID'
 export const SET_KU_ID = 'SET_KU_ID'
+export const SET_PREDICTION = 'SET_PREDICTION'
 
 export const SET_REGIONS = 'SET_REGIONS'
 export const SET_REGION_IS_CHANGING = 'SET_REGION_IS_CHANGING'
