@@ -12,11 +12,11 @@ const image = createSlice({
     initialState,
     reducers: {
         imageSetPath: (state, action) => {
-            const { path } = action.payload;
+            const { path } = action.payload
             state.path = path
         },
         imageSetMeta: (state, action) => {
-            const { meta } = action.payload;
+            const { meta } = action.payload
             state.meta = meta
         },
         imageSetTripDate: (state, action) => {
@@ -24,7 +24,7 @@ const image = createSlice({
             state.date = date
         },
         imageSetTripNumber: (state, action) => {
-            const { number } = action.payload;
+            const { number } = action.payload
             state.tripNumber = number
         },
         imageSetAll: (state, action) => {}

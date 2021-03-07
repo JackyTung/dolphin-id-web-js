@@ -1,1 +1,1 @@
-export const getBasename = () => ''
+export const getBasename = (path) => path.split("/").reverse()[0]
