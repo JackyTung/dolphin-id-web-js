@@ -10,11 +10,13 @@ const TypeFile = 'file'
 
 function FileBrowserItem(props) {
     console.log(props)
+    const label = utils.getBasename(props.path)
+    
     if (props.tp === TypeFile) {
         return (
             <TreeItem
                 nodeId={props.id}
-                label={utils.getBasename(props.path)}
+                label={label}
                 tp={props.tp}
                 path={props.path}
                 key={props.id.toString()}
@@ -27,7 +29,7 @@ function FileBrowserItem(props) {
             return (
                 <TreeItem
                 nodeId={props.id}
-                label={utils.getBasename(props.path)}
+                label={label}
                 tp={props.tp}
                 path={props.path}
                 key={props.id.toString()}
@@ -48,7 +50,7 @@ function FileBrowserItem(props) {
         return (
             <TreeItem
                 nodeId={props.id}
-                label={utils.getBasename(props.path)}
+                label={label}
                 tp={props.tp}
                 path={props.path}
             >

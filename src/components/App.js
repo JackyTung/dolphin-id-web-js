@@ -11,6 +11,8 @@ import ConnectedImageTable from '../containers/ConnectedImageTable'
 import ConnectedLoadRegionsButton from '../containers/ConnectedLoadImageDataButton'
 import ConnectedExportDataButton from '../containers/ConnectedExportDataButton'
 
+import { Link } from 'react-router-dom'
+
 const DEFAULT_COLOR = 'rgba(0, 0, 0, 0.5)'
 const RED = 'rgba(255, 0, 0, 0.5)';
 const GREEN = 'rgba(0, 255, 0, 0.5)';
@@ -36,6 +38,10 @@ class App extends Component {
 		};
 
 		return (
+			<div>
+			<div>
+				<Link to="/v2">前往新版</Link>
+			</div>
 			<div style={{ display: 'flex', flexDirection: 'row' }}>
 				<div style={{ display: 'flex', flexDirection: 'column', width: '40%'}}>
 					<ConnectedFolderGetter />
@@ -62,6 +68,7 @@ class App extends Component {
 						<ConnectedRegionTable></ConnectedRegionTable>
 					</div>
 				</div>
+			</div>
 			</div>
 		);
 	}
