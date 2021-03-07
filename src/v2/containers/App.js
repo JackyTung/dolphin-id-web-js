@@ -5,7 +5,7 @@ const App = () => {
     return (
         <div>
             <div>
-				<Link to="/">返回舊版</Link>
+    <Link to="/">返回舊版</Link>
 			</div>
             <div>
                 This is app v2

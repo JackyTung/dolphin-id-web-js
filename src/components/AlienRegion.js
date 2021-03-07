@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types'; 
-import style from './style';
-import * as c from '../const';
+import React, { Component } from 'react'
+import { PropTypes } from 'prop-types' 
+
+import * as c from '../const'
+
+import style from './style'
 
 function AlienRegion(props) {
 	const localStyle = {
@@ -9,7 +11,7 @@ function AlienRegion(props) {
 		height: props.height + '%',
 		left: props.x + '%',
 		top: props.y + '%'
-	};
+	}
 
 	let corners = (
 			<div>
@@ -122,7 +124,7 @@ function AlienRegion(props) {
 			>
 			{corners}
 		</div>
-	);
+	)
 } 
 
 // function renderCornerHandles() {
@@ -148,6 +150,6 @@ AlienRegion.propTypes = {
 // 	dataRenderer: PropTypes.func,
 // 	data: PropTypes.object,
 // 	customStyle: PropTypes.object
-};
+}
 
 export default AlienRegion
