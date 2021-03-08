@@ -1,8 +1,7 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux"
 
-import image from './image/slice'
-
+import image from "./image/slice"
 
 export default combineReducers({
-    image
+  image,
 })
