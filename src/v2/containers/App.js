@@ -1,17 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react"
+import CssBaseline from "@material-ui/core/CssBaseline"
+
+import Home from "./Home"
 
 const App = () => {
-    return (
-        <div>
-            <div>
-    <Link to="/">返回舊版</Link>
-			</div>
-            <div>
-                This is app v2
-            </div>
-        </div>
-    )
+  return (
+    <div>
+      <CssBaseline />
+      <Home />
+    </div>
+  )
 }
 
 export default App
