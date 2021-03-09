@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container"
 import { makeStyles } from "@material-ui/core/styles"
 
 import AppBar from "../../components/AppBar"
+import FolderGetter from "../FolderGetter"
 
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -15,6 +16,7 @@ const Content = () => {
     <Container>
       <div className={classes.toolbar} />
       <Box my={2}>This is content</Box>
+      <FolderGetter />
     </Container>
   )
 }

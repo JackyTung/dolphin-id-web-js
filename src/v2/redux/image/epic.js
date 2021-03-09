@@ -1,6 +1,6 @@
-import { combineEpics, ofType } from "redux-observable"
-import { empty, Observable, of } from "rxjs"
-import { catchError, map, mergeMap, takeUntil } from "rxjs/operators"
+import { ofType } from "redux-observable"
+import { empty } from "rxjs"
+import { mergeMap } from "rxjs/operators"
 
 import { imageSetPath } from "./slice"
 
