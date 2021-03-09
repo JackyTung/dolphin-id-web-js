@@ -1,5 +1,4 @@
 import React from "react"
-import Box from "@material-ui/core/Box"
 import Container from "@material-ui/core/Container"
 import { makeStyles } from "@material-ui/core/styles"
 
@@ -15,7 +14,6 @@ const Content = () => {
   return (
     <Container>
       <div className={classes.toolbar} />
-      <Box my={2}>This is content</Box>
       <FolderGetter />
     </Container>
   )

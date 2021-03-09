@@ -14,9 +14,21 @@ const fileSystem = createSlice({
       const { rootFolder } = action.payload
       state.rootFolder = rootFolder
     },
+    fetchFileSystemList: (state, action) => {
+      const { rootFolder } = action.payload
+      state.rootFolder = rootFolder
+    },
+    fetchFileSystemListSuccess: (state, action) => {
+      const { fileContents } = action.payload
+      state.fileContents = fileContents
+    },
   },
 })
 
-export const { setRootFolder } = fileSystem.actions
+export const {
+  setRootFolder,
+  fetchFileSystemList,
+  fetchFileSystemListSuccess,
+} = fileSystem.actions
 
 export default fileSystem.reducer
