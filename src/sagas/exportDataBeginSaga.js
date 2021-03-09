@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 
-import * as actions from "../action"
+import * as actions from "../redux/action"
 
 function* exportData(action) {
   console.log(action)

@@ -1,13 +1,13 @@
 import { connect } from "react-redux"
 
+import AlienRegion from "../components/AlienRegion"
+import * as c from "../const"
 import {
   moveRegion,
   setRegionStateMove,
   setRegionStateResize,
   setRegionStateUnchanged,
-} from "../action"
-import AlienRegion from "../components/AlienRegion"
-import * as c from "../const"
+} from "../redux/action"
 
 function getOppositeCorner(resizeDir, x, y, width, height) {
   switch (resizeDir) {

@@ -18,14 +18,12 @@ const MyAppBar = () => {
   const history = useHistory()
 
   const handleClick = () => {
-    history.push("/v1")
+    history.push("/")
   }
 
   return (
     <div>
-      <AppBar
-      //position="fixed"
-      >
+      <AppBar>
         <Toolbar>
           <Typography variant="h6">新版首頁</Typography>
           <Button

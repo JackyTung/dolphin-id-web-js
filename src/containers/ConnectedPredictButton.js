@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 
-import * as actions from "../action"
 import PredictButton from "../components/PredictButton"
+import * as actions from "../redux/action"
 
 function mapStateToProps(state) {
   return {

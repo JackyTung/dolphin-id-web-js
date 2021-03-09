@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 
-import * as actions from "../action"
 import LoadImageDataButton from "../components/LoadImageDataButton"
+import * as actions from "../redux/action"
 import * as utils from "../utils"
 
 function mapStateToProps(state) {

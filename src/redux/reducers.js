@@ -5,17 +5,7 @@ import { combineReducers } from "redux"
 import * as uuid from "uuid"
 
 import * as all_actions from "./action"
-import {
-  CREATE_REGION,
-  MOVE_REGION,
-  REGION_STATE_MOVE,
-  REGION_STATE_RESIZE,
-  REGION_STATE_UNCHANGED,
-  RESIZE_REGION,
-  SET_REGION_IS_CHANGING,
-  SET_TRIP_NUMBER,
-} from "./action"
-import * as c from "./const"
+import { CREATE_REGION, MOVE_REGION, RESIZE_REGION } from "./action"
 
 const RED = "rgba(255, 0, 0, 0.5)"
 const GREEN = "rgba(0, 255, 0, 0.5)"

@@ -1,12 +1,12 @@
 import { connect } from "react-redux"
 
+import AlienRegionSelect from "../components/AlienRegionSelect"
 import {
   createRegion,
   moveRegion,
   resizeRegion,
   setRegionStateUnchanged,
-} from "../action"
-import AlienRegionSelect from "../components/AlienRegionSelect"
+} from "../redux/action"
 
 function mapStateToProps(state) {
   return {

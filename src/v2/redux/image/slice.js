@@ -39,7 +39,7 @@ export const {
   imageSetAll,
 } = image.actions
 
-export default image
+export default image.reducer
 
 /*
 

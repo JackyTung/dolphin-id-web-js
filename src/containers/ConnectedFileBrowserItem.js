@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 
-import * as actions from "../action"
 import FileBrowserItem from "../components/FileBrowserItem"
+import * as actions from "../redux/action"
 import * as utils from "../utils"
 
 function mapStateToProps(state) {

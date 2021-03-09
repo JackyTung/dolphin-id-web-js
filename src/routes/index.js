@@ -1,15 +1,23 @@
 import React from "react"
+import Loadable from "react-loadable"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 
-import AppV1 from "../containers/App"
-import AppV2 from "../v2/containers/App"
+const AsyncAppV1 = new Loadable({
+  loader: () => import(/* webpackChunkName: "appv1" */ "../containers/App"),
+  loading: () => [],
+})
+
+const AsyncAppV2 = new Loadable({
+  loader: () => import(/* webpackChunkName: "appv2" */ "../v2/containers/App"),
+  loading: () => [],
+})
 
 const BaseRouter = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/v2" component={AppV2} />
-        <Route path="/" component={AppV1} />
+        <Route path="/v2" component={AsyncAppV2} />
+        <Route path="/" component={AsyncAppV1} />
       </Switch>
     </BrowserRouter>
   )

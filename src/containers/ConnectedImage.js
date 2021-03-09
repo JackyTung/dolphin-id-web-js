@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 
-import * as actions from "../action"
 import Image from "../components/Image"
+import * as actions from "../redux/action"
 
 function mapStateToProps(state) {
   return {

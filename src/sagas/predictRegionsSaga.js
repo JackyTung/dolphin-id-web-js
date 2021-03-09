@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 
-import * as actions from "../action"
+import * as actions from "../redux/action"
 // import * as base64 from 'base-64'
 
 const { PredictionServiceClient } = require("@google-cloud/automl").v1

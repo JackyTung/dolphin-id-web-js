@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import { PropTypes } from "prop-types"
 
-import { REGION_STATE_MOVE, REGION_STATE_RESIZE } from "../action"
 import RegionChangeState from "../const/RegionChangeState"
 import ConnectedAlienRegion from "../containers/ConnectedAlienRegion"
+import { REGION_STATE_MOVE, REGION_STATE_RESIZE } from "../redux/action"
 
 import AlienRegion from "./AlienRegion"
 import Region from "./Region"
