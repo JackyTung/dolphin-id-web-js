@@ -49,21 +49,3 @@ const PreviewImages = () => {
 }
 
 export default PreviewImages
-
-/*
-  return (
-    <div>
-      This is PreviewImages
-      {fileContents.map((file) => (
-        <div
-          key={nanoid()}
-          style={{
-            width: "50px",
-            height: "50px",
-            backgroundImage: `url(${testFile})`,
-            backgroundColor: "red",
-          }}
-        />
-      ))}
-    </div>
-*/
