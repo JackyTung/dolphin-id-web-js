@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   rootFolder: "",
-  imgSrc: "",
   fileContents: [],
+  isLoading: false,
 }
 
 const fileSystem = createSlice({
@@ -17,10 +17,12 @@ const fileSystem = createSlice({
     fetchFileSystemList: (state, action) => {
       const { rootFolder } = action.payload
       state.rootFolder = rootFolder
+      state.isLoading = true
     },
     fetchFileSystemListSuccess: (state, action) => {
       const { fileContents } = action.payload
       state.fileContents = fileContents
+      state.isLoading = false
     },
   },
 })

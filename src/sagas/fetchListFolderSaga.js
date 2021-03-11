@@ -4,7 +4,6 @@ import * as actions from "../redux/action"
 
 function* fetchListFolder(action) {
   const url = `${action.api}/dir?root_dir=${action.folder}`
-  console.log(url)
   const contents = yield call(() =>
     fetch(url).then((response) => response.json())
   )

@@ -1,11 +1,12 @@
 import { ofType } from "redux-observable"
 import { map, mergeMap } from "rxjs/operators"
+import { DEFAULT_IMG_SRC } from "v2/constant"
 
 import * as backend from "../../api/backend"
 
 import { fetchFileSystemList, fetchFileSystemListSuccess } from "./slice"
 
-export const fetchFileSystemListEpic = (action$, state$) =>
+export const fetchFileSystemListEpic = (action$) =>
   action$.pipe(
     ofType(fetchFileSystemList.type),
     mergeMap((action) => {
@@ -17,7 +18,10 @@ export const fetchFileSystemListEpic = (action$, state$) =>
               contents: { files },
             },
           } = response
-          return fetchFileSystemListSuccess({ fileContents: files })
+
+          const newFiles = files.map((f) => `${DEFAULT_IMG_SRC}?img_path=${f}`)
+
+          return fetchFileSystemListSuccess({ fileContents: newFiles })
         })
       )
     })
