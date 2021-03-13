@@ -1,8 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+/*
+  labels: [label]
+  label: {
+    x,
+    y,
+    width,
+    height,
+    index,
+    new, // ???
+    data, // ???
+    isChanging,
+
+    labelType, // ex: label, box, mask
+    labelName, // ex: 鯨魚種類1, 鯨魚種類2
+  }
+*/
+
 const initialState = {
   path: "",
-  meta: "",
+  meta: {
+    width: 0,
+    height: 0,
+  },
   tripDate: "",
   tripNumber: "",
 }
