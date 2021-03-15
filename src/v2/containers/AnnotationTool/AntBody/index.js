@@ -8,13 +8,13 @@ import useImage from "use-image"
 import { DEFAULT_STAGE_HEIGHT, DEFAULT_STAGE_WIDTH } from "v2/constant"
 //import RegionLayer from "./RegionLayer"
 import { store } from "v2/containers/App"
-import { imageSetMeta } from "v2/redux/image/slice"
+import { imageClearMeta, imageSetMeta } from "v2/redux/image/slice"
 
 import ImageLayer from "./ImageLayer"
 
 const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: "#006994", // ocean blue
+    backgroundColor: "black", // ocean blue #006994
     width: DEFAULT_STAGE_WIDTH,
     height: DEFAULT_STAGE_HEIGHT,
   },
@@ -24,11 +24,18 @@ const AntBody = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const path = useSelector((state) => state.image.path)
+  const antMeta = useSelector((state) => state.image.antMeta)
   const [image] = useImage(path)
+
+  const { layer } = antMeta
 
   useEffect(() => {
     if (image && path) {
       dispatch(imageSetMeta({ source: image }))
+    }
+
+    return () => {
+      dispatch(imageClearMeta())
     }
   }, [dispatch, image, path])
 
@@ -36,6 +43,10 @@ const AntBody = () => {
   const handleMouseUp = () => {}
   const handleMouseMove = () => {
     console.log("hi")
+  }
+
+  if (!image) {
+    return <div>This is annotation tool</div>
   }
 
   return (
@@ -50,7 +61,7 @@ const AntBody = () => {
         height={DEFAULT_STAGE_HEIGHT}
       >
         <Provider store={store}>
-          <Layer>
+          <Layer x={layer.x} y={layer.y}>
             <Group>
               <ImageLayer />
             </Group>

@@ -25,37 +25,45 @@ const calcAntMeta = (imgSource) => {
   const { width: imgWidth, height: imgHeight } = imgSource
   if (imgWidth >= imgHeight) {
     scale = DEFAULT_STAGE_WIDTH / imgWidth
+    const nHeight = imgHeight * scale
+    const nY = (DEFAULT_STAGE_HEIGHT - nHeight) / 2
 
     return {
       imageMeta: { width: imgWidth, height: imgHeight },
-      imageCanvas: { width: DEFAULT_STAGE_WIDTH, height: imgHeight * scale },
+      imageCanvas: { width: DEFAULT_STAGE_WIDTH, height: nHeight },
+      layer: { x: 0, y: nY },
     }
   } else {
     scale = DEFAULT_STAGE_HEIGHT / imgHeight
+    const nWidth = imgWidth * scale
+    const nX = (DEFAULT_STAGE_WIDTH - nWidth) / 2
     return {
       imageMeta: { width: imgWidth, height: imgHeight },
-      imageCanvas: { width: imgWidth * scale, height: DEFAULT_STAGE_HEIGHT },
+      imageCanvas: { width: nWidth, height: DEFAULT_STAGE_HEIGHT },
+      layer: { x: nX, y: 0 },
     }
   }
 }
 
+const initAntMeta = {
+  imageMeta: {
+    width: 0,
+    height: 0,
+  },
+  imageCanvas: {
+    width: 0,
+    height: 0,
+  },
+  layer: {
+    x: 0,
+    y: 0,
+  },
+  scale: 0,
+}
+
 const initialState = {
   path: "",
-  antMeta: {
-    imageMeta: {
-      width: 0,
-      height: 0,
-    },
-    imageCanvas: {
-      width: 0,
-      height: 0,
-    },
-    layer: {
-      x: 0,
-      y: 0,
-    },
-    scale: 0,
-  },
+  antMeta: initAntMeta,
   source: null,
   tripDate: "",
   tripNumber: "",
@@ -84,8 +92,10 @@ const image = createSlice({
       const { number } = action.payload
       state.tripNumber = number
     },
-    imageSetAll: (state, action) => {},
-    imageClearMeta: () => initialState,
+    imageClearMeta: (state) => {
+      state.source = null
+      state.antMeta = initAntMeta
+    },
   },
 })
 
@@ -94,7 +104,6 @@ export const {
   imageSetMeta,
   imageSetTripDate,
   imageSetTripNumber,
-  imageSetAll,
   imageClearMeta,
 } = image.actions
 
