@@ -6,7 +6,7 @@ import configureStore from "../redux/rootStore"
 
 import Home from "./Home"
 
-const store = configureStore()
+export const store = configureStore()
 
 const App = () => {
   return (

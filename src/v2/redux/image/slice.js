@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { DEFAULT_STAGE_HEIGHT, DEFAULT_STAGE_WIDTH } from "v2/constant"
 
 /*
   labels: [label]
@@ -17,12 +18,45 @@ import { createSlice } from "@reduxjs/toolkit"
   }
 */
 
+// TODO: 處理影像寬高比Stage小的case
+// imageSource: <img src="xxx" />
+const calcAntMeta = (imgSource) => {
+  let scale
+  const { width: imgWidth, height: imgHeight } = imgSource
+  if (imgWidth >= imgHeight) {
+    scale = DEFAULT_STAGE_WIDTH / imgWidth
+
+    return {
+      imageMeta: { width: imgWidth, height: imgHeight },
+      imageCanvas: { width: DEFAULT_STAGE_WIDTH, height: imgHeight * scale },
+    }
+  } else {
+    scale = DEFAULT_STAGE_HEIGHT / imgHeight
+    return {
+      imageMeta: { width: imgWidth, height: imgHeight },
+      imageCanvas: { width: imgWidth * scale, height: DEFAULT_STAGE_HEIGHT },
+    }
+  }
+}
+
 const initialState = {
   path: "",
-  meta: {
-    width: 0,
-    height: 0,
+  antMeta: {
+    imageMeta: {
+      width: 0,
+      height: 0,
+    },
+    imageCanvas: {
+      width: 0,
+      height: 0,
+    },
+    layer: {
+      x: 0,
+      y: 0,
+    },
+    scale: 0,
   },
+  source: null,
   tripDate: "",
   tripNumber: "",
 }
@@ -36,8 +70,11 @@ const image = createSlice({
       state.path = path
     },
     imageSetMeta: (state, action) => {
-      const { meta } = action.payload
-      state.meta = meta
+      const { source } = action.payload
+      const newSource = source || state.source
+
+      state.source = newSource
+      state.antMeta = calcAntMeta(newSource)
     },
     imageSetTripDate: (state, action) => {
       const { date } = action.payload
@@ -48,6 +85,7 @@ const image = createSlice({
       state.tripNumber = number
     },
     imageSetAll: (state, action) => {},
+    imageClearMeta: () => initialState,
   },
 })
 
@@ -57,13 +95,7 @@ export const {
   imageSetTripDate,
   imageSetTripNumber,
   imageSetAll,
+  imageClearMeta,
 } = image.actions
 
 export default image.reducer
-
-/*
-
-什麼時候使用?
-  case all_actions.IMAGE_SET_ALL:
-    return action.data
-*/
