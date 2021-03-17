@@ -6,11 +6,16 @@ import { useSelector } from "react-redux"
 import { makeStyles } from "@material-ui/core/styles"
 import useImage from "use-image"
 import { DEFAULT_STAGE_HEIGHT, DEFAULT_STAGE_WIDTH } from "v2/constant"
-//import RegionLayer from "./RegionLayer"
 import { store } from "v2/containers/App"
+import {
+  handleMouseDown,
+  handleMouseMove,
+  handleMouseUp,
+} from "v2/redux/event/slice"
 import { imageClearMeta, imageSetMeta } from "v2/redux/image/slice"
 
 import ImageLayer from "./ImageLayer"
+import RegionLayer from "./RegionLayer"
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -39,10 +44,14 @@ const AntBody = () => {
     }
   }, [dispatch, image, path])
 
-  const handleMouseDown = () => {}
-  const handleMouseUp = () => {}
-  const handleMouseMove = () => {
-    console.log("hi")
+  const onMouseDown = (event) => {
+    dispatch(handleMouseDown({ event }))
+  }
+  const onMouseUp = (event) => {
+    dispatch(handleMouseUp({ event }))
+  }
+  const onMouseMove = (event) => {
+    dispatch(handleMouseMove({ event }))
   }
 
   if (!image) {
@@ -54,9 +63,9 @@ const AntBody = () => {
       <Stage
         className={classes.root}
         name="name"
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        onMouseMove={onMouseMove}
         width={DEFAULT_STAGE_WIDTH}
         height={DEFAULT_STAGE_HEIGHT}
       >
@@ -64,6 +73,11 @@ const AntBody = () => {
           <Layer x={layer.x} y={layer.y}>
             <Group>
               <ImageLayer />
+            </Group>
+          </Layer>
+          <Layer x={layer.x} y={layer.y}>
+            <Group>
+              <RegionLayer />
             </Group>
           </Layer>
         </Provider>
